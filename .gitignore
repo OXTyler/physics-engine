@@ -1,6 +1,15 @@
 # Compiled class file
 *.class
 
+#ignore ItelliJ files
+.gradle
+.idea
+build
+gradle
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
 # Log file
 *.log
 
