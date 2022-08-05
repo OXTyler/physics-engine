@@ -1,5 +1,6 @@
 package renderer.entity;
 
+import renderer.input.ControlType;
 import renderer.point.Vector;
 
 import java.awt.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 public interface IEntity {
     void render(Graphics g);
 
-    void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector);
+    void rotate(ControlType mode, boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector);
 
     void setLighting(Vector lightVector);
 

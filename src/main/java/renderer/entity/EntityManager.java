@@ -2,6 +2,7 @@ package renderer.entity;
 
 import renderer.entity.builder.BasicEntityBuilder;
 import renderer.input.ClickType;
+import renderer.input.ControlType;
 import renderer.input.Mouse;
 import renderer.point.Vector;
 
@@ -33,9 +34,9 @@ public class EntityManager {
         this.setLighting();
     }
 
-    public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector){
+    public void rotate(ControlType mode, boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector){
         for(IEntity entity : this.entities){
-            entity.rotate(CW, xDegrees, yDegrees, zDegrees, lightVector);
+            entity.rotate(mode, CW, xDegrees, yDegrees, zDegrees, lightVector);
         }
     }
     //TODO create better lighting system

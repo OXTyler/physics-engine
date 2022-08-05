@@ -7,4 +7,8 @@ public class Point {
         this.y = y;
         this.z = z;
     }
+
+    public double[] getCoords(){
+        return new double[]{x,y,z};
+    }
 }

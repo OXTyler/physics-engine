@@ -1,5 +1,6 @@
 package renderer.entity;
 
+import renderer.input.ControlType;
 import renderer.point.Vector;
 import renderer.shapes.Polyhedron;
 
@@ -32,9 +33,9 @@ public class Entity implements IEntity{
     }
 
     @Override
-    public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector) {
+    public void rotate(ControlType mode, boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector) {
         for(Polyhedron poly: this.polys){
-            poly.rotate(CW, xDegrees, yDegrees, zDegrees, lightVector);
+            poly.rotate(mode, CW, xDegrees, yDegrees, zDegrees, lightVector);
         }
     }
 

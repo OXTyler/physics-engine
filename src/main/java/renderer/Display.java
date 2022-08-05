@@ -19,7 +19,8 @@ public class Display  extends Canvas implements Runnable{
     public static int WIDTH = 0;
     public static int HEIGHT = 0;
     private EntityManager entityManager;
-    private UI ui = new UI();
+    private Controller controller;
+    private UI ui;
     public static Point origin = new Point(0,0,0);
     private Mouse mouse;
 
@@ -27,7 +28,7 @@ public class Display  extends Canvas implements Runnable{
     private Thread thread;
     public JFrame frame;
     private static boolean running = false;
-    private Controller controller;
+
 
     public Display(int WIDTH, int HEIGHT, String title){
         this.frame = new JFrame();
@@ -39,6 +40,7 @@ public class Display  extends Canvas implements Runnable{
 
         this.entityManager = new EntityManager();
         this.controller = new Controller(entityManager);
+        ui = new UI(controller);
         this.addKeyListener(controller);
         this.mouse = new Mouse();
 
@@ -46,6 +48,7 @@ public class Display  extends Canvas implements Runnable{
         this.addMouseMotionListener(this.mouse);
         this.addMouseWheelListener(this.mouse);
     }
+
 
     public synchronized void start() {
         running = true;
@@ -117,5 +120,6 @@ public class Display  extends Canvas implements Runnable{
 
     private void update(){
         Camera.update(entityManager, mouse);
+        ui.update();
     }
 }

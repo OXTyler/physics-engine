@@ -2,6 +2,7 @@ package renderer.shapes;
 
 import renderer.Camera;
 import renderer.Display;
+import renderer.input.ControlType;
 import renderer.point.Point;
 import renderer.point.Vector;
 
@@ -44,9 +45,13 @@ public class Polyhedron {
         }
     }
     //Used to rotate object
-    public void rotate(boolean CW, double xDeg, double yDeg, double zDeg, Vector lightVector){
+    public void rotate(ControlType mode, boolean CW, double xDeg, double yDeg, double zDeg, Vector lightVector){
         for(Polygon poly : polygons){
-            poly.rotate(CW, xDeg, yDeg, zDeg, lightVector, center);
+            if(mode == ControlType.Object)
+                poly.rotate(CW, xDeg, yDeg, zDeg, lightVector, center);
+            else if(mode == ControlType.Camera){
+                poly.rotate(CW, xDeg, yDeg, zDeg, lightVector, Camera.cameraCoords.getCoords());
+            }
         }
         this.sortPolygons();
     }

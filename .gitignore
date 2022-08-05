@@ -1,7 +1,7 @@
 # Compiled class file
 *.class
 
-#ignore ItelliJ files
+#ignore ItelliJ files and gradle
 .gradle
 .idea
 build

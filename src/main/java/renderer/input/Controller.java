@@ -10,7 +10,7 @@ public class Controller implements KeyListener {
 
     private EntityManager entityManager;
     private double speed = 5;
-
+    public static int mode = 0;
     public Controller(EntityManager entityManager){
         this.entityManager = entityManager;
     }
@@ -23,7 +23,7 @@ public class Controller implements KeyListener {
         return speed;
     }
 
-    int mode = 0;
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -51,15 +51,24 @@ public class Controller implements KeyListener {
             //changes mode between object and camera mode
             case 't':
                 speed = -speed;
+                mode = mode == 0 ? 1 : 0;
                 break;
         }
         if(e.isControlDown()) entityManager.translate(0,0,-speed);
     }
 
-
-
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public static ControlType getMode(){
+        switch (mode){
+            case 0:
+                return ControlType.Camera;
+            case 1:
+                return ControlType.Object;
+        }
+        return ControlType.Unknown;
     }
 }
