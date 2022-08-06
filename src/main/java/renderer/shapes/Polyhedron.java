@@ -21,7 +21,6 @@ public class Polyhedron {
         for(int i = 0; i < polygons.length; i++){
             this.polygons[i] = new Polygon(polygons[i]);
         }
-        this.sortPolygons();
     }
 
     public  Polyhedron(double[] center, ArrayList<Polygon> polys){
@@ -32,14 +31,15 @@ public class Polyhedron {
         for(int i = 0; i < polygons.length; i++){
             this.polygons[i] = new Polygon(Color.BLUE, polys.get(i).getPoints());
         }
-        this.sortPolygons();
     }
     //renders out all polygons for the given Polyhedron
     public void render(Graphics graphics){
-
         for(Polygon poly: this.polygons){
-            Vector viewDir = new Vector(Display.origin, new Point(poly.getMiddle()[0],poly.getMiddle()[1], poly.getMiddle()[2]));
-            if(Vector.normalize(poly.getNormal()).x < 0){
+            //this determines if the face is facing the camera, if it is, render it
+            //doesnt consider FOV yet, so far if the face is in front of the camera, it will render
+            Vector viewDir = new Vector(Camera.cameraCoords, new Point(poly.getMiddle()[0],poly.getMiddle()[1], poly.getMiddle()[2]));
+            //this if statement is ugly, but it takes the normal vector of the face, and crosses it with the vector pointing from the camera to the face
+            if(Vector.dot(viewDir, poly.getNormal()) >= 0){
                 poly.render(graphics);
             }
         }
@@ -53,7 +53,6 @@ public class Polyhedron {
                 poly.rotate(CW, xDeg, yDeg, zDeg, lightVector, Camera.cameraCoords.getCoords());
             }
         }
-        this.sortPolygons();
     }
 
     public void translate(double x, double y, double z) {
@@ -66,9 +65,6 @@ public class Polyhedron {
     }
 
     //sorts the faces so the object renders with the right faces in the front TODO how faces are rendered first needs to be improved
-    private void sortPolygons(){
-        Polygon.sortPolygons(this.polygons);
-    }
 
     private void setPolygonColor(){
         for(Polygon poly : this.polygons){

@@ -10,7 +10,7 @@ public class Controller implements KeyListener {
 
     private EntityManager entityManager;
     private double speed = 5;
-    public static int mode = 0;
+    public static int mode = 1;
     public Controller(EntityManager entityManager){
         this.entityManager = entityManager;
     }

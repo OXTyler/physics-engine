@@ -27,7 +27,7 @@ public class Vector {
         return new Vector(this.x - vector2.x, this.y - vector2.y, this.z - vector2.z);
     }
     public static double dot(Vector v1, Vector v2){
-        return v1.x * v2.x + v1.y * v1.y + v1.z * v2.z;
+        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
     public static Vector cross(Vector v1, Vector v2){
         return new Vector(v1.y * v2.z - v1.z * v2.y,

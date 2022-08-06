@@ -1,14 +1,11 @@
 package renderer.entity;
 
 import renderer.entity.builder.BasicEntityBuilder;
-import renderer.input.ClickType;
 import renderer.input.ControlType;
-import renderer.input.Mouse;
 import renderer.point.Vector;
 
 import java.awt.*;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +25,7 @@ public class EntityManager {
     //TODO make a way to spawn objects inside the render
     public void init() throws IOException {
         //this.entities.add(BasicEntityBuilder.createDiamond(Color.CYAN,100, 0 ,0 ,100));
-        //this.entities.add(BasicEntityBuilder.loadSTL(Color.BLUE, Paths.get("C:\\Users\\lackt\\Documents\\Projects\\Physics Engine\\src\\main\\java\\renderer\\entity\\sphere.stl"), 0, 0, 0));
+        //this.entities.add(BasicEntityBuilder.loadSTL(Color.BLUE, Paths.get("C:\\Users\\lackt\\Documents\\Projects\\Physics Engine\\src\\main\\java\\renderer\\entity\\shapeFiles\\astronaut.stl"), 0, 0, 0));
         //this.entities.add(BasicEntityBuilder.createPlane(Color.RED, 500));
         this.entities.add(BasicEntityBuilder.createCube(100,0,0,0));
         this.setLighting();

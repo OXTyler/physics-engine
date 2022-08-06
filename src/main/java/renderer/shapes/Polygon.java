@@ -91,14 +91,7 @@ public class Polygon {
         this.lightingColor = new Color(red,green,blue);
     }
 
-    //returns average X of all points in the polygon, used to decide what renders first for the shape
-    public double getAverageX(){
-        double sum = 0;
-        for(Point point : this.points){
-            sum += point.x;
-        }
-        return sum / this.points.length;
-    }
+
     public double[] getMiddle(){
         double xSum = 0;
         double ySum = 0;
@@ -110,25 +103,6 @@ public class Polygon {
         }
         double[] mid = {xSum/this.points.length, ySum/this.points.length, zSum/this.points.length};
         return mid;
-    }
-    //sorts which polygons go first for rendering, needs improvement
-    public static Polygon[] sortPolygons(Polygon[] polygons) {
-        List<Polygon> polygonList = new ArrayList<Polygon>();
-
-        for(Polygon poly : polygons){
-            polygonList.add(poly);
-        }
-        Collections.sort(polygonList, new Comparator<Polygon>() {
-            @Override
-            public int compare(Polygon o1, Polygon o2) {
-                return (o2.getAverageX() - o1.getAverageX() < 0 ? 1 : -1);
-            }
-        });
-
-        for(int i = 0; i < polygons.length; i++){
-            polygons[i] = polygonList.get(i);
-        }
-        return polygons;
     }
 
     public Point[] getPoints() {

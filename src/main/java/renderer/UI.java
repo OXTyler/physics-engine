@@ -11,7 +11,6 @@ public class UI {
     private final Controller controller;
     public UI(Controller controller){
         this.controller = controller;
-        //initialization does nothings
     }
     //updates the text info
     public void update(){
