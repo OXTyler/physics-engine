@@ -19,25 +19,25 @@ public class PointConverter {
         return  new java.awt.Point(x2d, y2d);
     }
 
-    public static void rotateAxisX(Point point, Boolean CW, double degrees, double[] center){
-        double radius = Math.sqrt((point.y - center[1]) * (point.y - center[1]) +  (point.z - center[2]) * (point.z -center[2]));
-        double theta = Math.atan2(point.z-center[2], point.y-center[1]);
+    public static void rotateAxisX(Point point, Boolean CW, double degrees, Point center){
+        double radius = Math.sqrt((point.y - center.x) * (point.y - center.y) +  (point.z - center.z) * (point.z -center.z));
+        double theta = Math.atan2(point.z-center.z, point.y-center.y);
         theta += 2*Math.PI/360*degrees*(CW ? -1: 1);
-        point.z = radius * Math.sin(theta) + center[2];
-        point.y = radius * Math.cos(theta) + center[1];
+        point.z = radius * Math.sin(theta) + center.z;
+        point.y = radius * Math.cos(theta) + center.y;
     }
-    public static void rotateAxisY(Point point, Boolean CW, double degrees, double[] center){
-        double radius = Math.sqrt((point.x-center[0]) * (point.x-center[0]) +  (point.z - center[2]) * (point.z - center[2]));
-        double theta = Math.atan2(point.x - center[0], point.z - center[2]);
+    public static void rotateAxisY(Point point, Boolean CW, double degrees, Point center){
+        double radius = Math.sqrt((point.x-center.x) * (point.x-center.x) +  (point.z - center.z) * (point.z - center.z));
+        double theta = Math.atan2(point.x - center.x, point.z - center.z);
         theta += 2*Math.PI/360*degrees*(CW ? -1: 1);
-        point.x = radius * Math.sin(theta) + center[0];
-        point.z = radius * Math.cos(theta) + center[2];
+        point.x = radius * Math.sin(theta) + center.x;
+        point.z = radius * Math.cos(theta) + center.z;
     }
-    public static void rotateAxisZ(Point point, Boolean CW, double degrees, double[] center){
-        double radius = Math.sqrt((point.y - center[1]) * (point.y - center[1]) +  (point.x - center[0]) * (point.x - center[0]));
-        double theta = Math.atan2(point.y -center[1], point.x - center[0]);
+    public static void rotateAxisZ(Point point, Boolean CW, double degrees, Point center){
+        double radius = Math.sqrt((point.y - center.y) * (point.y - center.y) +  (point.x - center.x) * (point.x - center.x));
+        double theta = Math.atan2(point.y -center.y, point.x - center.x);
         theta += 2*Math.PI/360*degrees*(CW ? -1: 1);
-        point.y = radius * Math.sin(theta) + center[1];
-        point.x = radius * Math.cos(theta) + center[0];
+        point.y = radius * Math.sin(theta) + center.y;
+        point.x = radius * Math.cos(theta) + center.x;
     }
 }

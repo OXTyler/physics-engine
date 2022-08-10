@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class Polyhedron {
     private Polygon[] polygons;
     private Color color;
-    private double[] center;
+    private Point center;
 
-    public Polyhedron(Color color, double[] center, Polygon... polygons){
+    public Polyhedron(Color color, Point center, Polygon... polygons){
         this.color = color;
         this.center = center;
         this.polygons = new Polygon[polygons.length];
@@ -23,8 +23,8 @@ public class Polyhedron {
         }
     }
 
-    public  Polyhedron(double[] center, ArrayList<Polygon> polys){
-        this.color = Color.BLUE;
+    public  Polyhedron(Color color, Point center, ArrayList<Polygon> polys){
+        this.color = color;
         this.center = center;
         System.out.println(polys.size());
         this.polygons = new Polygon[polys.size()];
@@ -37,7 +37,11 @@ public class Polyhedron {
         for(Polygon poly: this.polygons){
             //this determines if the face is facing the camera, if it is, render it
             //doesnt consider FOV yet, so far if the face is in front of the camera, it will render
-            Vector viewDir = new Vector(Camera.cameraCoords, new Point(poly.getMiddle()[0],poly.getMiddle()[1], poly.getMiddle()[2]));
+            Vector viewDir = new Vector(Camera.cameraCoords,
+                    new Point(poly.getMiddle().x,
+                              poly.getMiddle().y,
+                              poly.getMiddle().z
+                    ));
             //this if statement is ugly, but it takes the normal vector of the face, and crosses it with the vector pointing from the camera to the face
             if(Vector.dot(viewDir, poly.getNormal()) >= 0){
                 poly.render(graphics);
@@ -50,21 +54,52 @@ public class Polyhedron {
             if(mode == ControlType.Object)
                 poly.rotate(CW, xDeg, yDeg, zDeg, lightVector, center);
             else if(mode == ControlType.Camera){
-                poly.rotate(CW, xDeg, yDeg, zDeg, lightVector, Camera.cameraCoords.getCoords());
+                poly.rotate(CW, xDeg, yDeg, zDeg, lightVector, Camera.cameraCoords);
             }
         }
     }
 
     public void translate(double x, double y, double z) {
-        center[0] += x;
-        center[1] += y;
-        center[2] += z;
+        center.x += x;
+        center.y += y;
+        center.z += z;
         for(Polygon poly : polygons){
             poly.translate(x,y,z);
         }
     }
 
-    //sorts the faces so the object renders with the right faces in the front TODO how faces are rendered first needs to be improved
+    public Vector getCenter(){
+        int xSum = 0;
+        int ySum = 0;
+        int zSum = 0;
+        Point center = new Point();
+        for(int i = 0; i < polygons.length; i++){
+            xSum += polygons[i].getMiddle().x;
+            ySum += polygons[i].getMiddle().y;
+            zSum += polygons[i].getMiddle().z;
+        }
+        center.x = xSum / polygons.length;
+        center.y = ySum / polygons.length;
+        center.z = zSum / polygons.length;
+        return new Vector(center.x, center.y, center.z);
+    }
+
+    public Vector getFurthest(Vector dir) {
+        double magnitude;
+        Vector furthest;
+        furthest = new Vector(this.polygons[0].getMiddle(), this.polygons[0].getPoints()[0]);
+        for(Polygon poly : polygons){
+            magnitude = Vector.dot(furthest, dir);
+            for(Point p : poly.getPoints()){
+                Vector temp = new Vector(poly.getMiddle(), p);
+                if(Vector.dot(temp, dir) > magnitude){
+                    magnitude = Vector.dot(temp, dir);
+                    furthest = temp;
+                }
+            }
+        }
+        return furthest;
+    }
 
     private void setPolygonColor(){
         for(Polygon poly : this.polygons){
@@ -76,6 +111,10 @@ public class Polyhedron {
         for(Polygon poly : polygons){
             poly.setLighting(lightVector);
         }
+    }
+
+    public Polygon[] getPolygons(){
+        return polygons;
     }
 
 }

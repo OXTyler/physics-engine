@@ -2,6 +2,7 @@ package renderer.entity;
 
 import renderer.entity.builder.BasicEntityBuilder;
 import renderer.input.ControlType;
+import renderer.point.Point;
 import renderer.point.Vector;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 //manages everything inside the scene, what to spawn and when, and how to render all objects
 public class EntityManager {
+    public static final Point ORIGIN = new Point(0,0,0);
     private List<IEntity> entities;
     private int initialX, initialY, x, y, xDif, yDif;
     public Vector lightVector = Vector.normalize(new Vector(1,1,1));

@@ -19,7 +19,7 @@ public class BasicEntityBuilder {
 
         //creates the 8 points for the cube, then initializes them as polygons (in ccw order)
 
-        double[] center = {centerX, centerY,centerZ};
+        Point center = new Point(centerX, centerY, centerZ);
         Point p1 = new Point(centerX - size/2, centerY - size/2, centerZ - size/2);
         Point p2 = new Point(centerX - size/2, centerY + size/2, centerZ - size/2);
         Point p3 = new Point(centerX - size/2, centerY + size/2, centerZ + size/2);
@@ -47,7 +47,7 @@ public class BasicEntityBuilder {
         int edges = 10;
         //sets the factor for the top edge chamfer
         double chamfer = 0.75;
-        double[] center = {centerX, centerY, centerZ};
+        Point center = new Point(centerX, centerY, centerZ);
         Point bottom = new Point(centerX, centerY, centerZ - size / 3);
         Point[] outerPoints = new Point[edges];
         Point[] innerPoints = new Point[edges];
@@ -86,7 +86,7 @@ public class BasicEntityBuilder {
         Point p3 = new Point(-size/2, size/2, 0);
         Point p4 = new Point(-size/2, -size/2, 0);
         Polygon poly = new Polygon(color, p1,p2,p3,p4);
-        Polyhedron polyhedron = new Polyhedron(Color.GREEN, new double[]{0,0,0}, poly);
+        Polyhedron polyhedron = new Polyhedron(Color.GREEN, new Point(0,0,0), poly);
 
         return new Entity(polyhedron);
     }
@@ -97,8 +97,8 @@ public class BasicEntityBuilder {
     public static IEntity loadSTL(Color color, Path filePath, double centerX, double centerY, double centerZ) throws IOException {
         List<Polyhedron> polys = new ArrayList<>();
         ArrayList<Polygon> poly = (ArrayList<Polygon>) STLParser.parseSTLFile(filePath, centerX, centerY, centerZ);
-        double[] center = new double[]{centerX,centerY,centerZ};
-        polys.add(new Polyhedron(center, poly));
+        Point center = new Point(centerX, centerY, centerZ);
+        polys.add(new Polyhedron(Color.BLUE, center, poly));
         return new Entity(polys);
     }
 }

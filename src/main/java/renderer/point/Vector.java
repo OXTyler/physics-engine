@@ -20,11 +20,11 @@ public class Vector {
         double mag = Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
         return new Vector(v.x/mag, v.y/mag, v.z/mag);
     }
-    public Vector add(Vector vector2){
-        return new Vector(this.x + vector2.x, this.y + vector2.y, this.z + vector2.z);
+    public static Vector add(Vector v1, Vector v2){
+        return new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
     }
-    public Vector sub(Vector vector2){
-        return new Vector(this.x - vector2.x, this.y - vector2.y, this.z - vector2.z);
+    public static Vector sub(Vector v1, Vector v2){
+        return new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
     }
     public static double dot(Vector v1, Vector v2){
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
@@ -33,5 +33,12 @@ public class Vector {
         return new Vector(v1.y * v2.z - v1.z * v2.y,
                           v1.z * v2.x - v1.x * v2.z,
                           v1.x * v2.y - v1.y * v2.x);
+    }
+
+    public static Vector inverse(Vector v) {
+        v.x *= -1;
+        v.y *= -1;
+        v.z *= -1;
+        return v;
     }
 }
