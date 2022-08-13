@@ -9,6 +9,7 @@ import renderer.shapes.Polyhedron;
 import java.awt.*;
 import java.util.ArrayList;
 
+//TODO fix to work with simplex class and Collider
 public class Collision {
     //will use GJK algo in order to determine if a collision occurs
     public static boolean isCollide(Polyhedron p1, Polyhedron p2){
@@ -24,6 +25,6 @@ public class Collision {
 
     //finds the point in the minkowski difference for a given direction
     public static Vector support(Vector dir, Polyhedron p1, Polyhedron p2){
-        return Vector.sub(p1.getFurthest(dir), p2.getFurthest(Vector.inverse(dir)));
+        return Vector.sub(p1.getCollider().getFurthest(dir), p2.getCollider().getFurthest(Vector.inverse(dir)));
     }
 }

@@ -1,5 +1,6 @@
 package renderer.shapes;
 
+import physics.Collider;
 import renderer.Camera;
 import renderer.Display;
 import renderer.input.ControlType;
@@ -13,6 +14,7 @@ public class Polyhedron {
     private Polygon[] polygons;
     private Color color;
     private Point center;
+    private Collider collider;
 
     public Polyhedron(Color color, Point center, Polygon... polygons){
         this.color = color;
@@ -84,23 +86,9 @@ public class Polyhedron {
         return new Vector(center.x, center.y, center.z);
     }
 
-    public Vector getFurthest(Vector dir) {
-        double magnitude;
-        Vector furthest;
-        furthest = new Vector(this.polygons[0].getMiddle(), this.polygons[0].getPoints()[0]);
-        for(Polygon poly : polygons){
-            magnitude = Vector.dot(furthest, dir);
-            for(Point p : poly.getPoints()){
-                Vector temp = new Vector(poly.getMiddle(), p);
-                if(Vector.dot(temp, dir) > magnitude){
-                    magnitude = Vector.dot(temp, dir);
-                    furthest = temp;
-                }
-            }
-        }
-        return furthest;
+    public Collider getCollider(){
+        return collider;
     }
-
     private void setPolygonColor(){
         for(Polygon poly : this.polygons){
             poly.setColor(this.color);

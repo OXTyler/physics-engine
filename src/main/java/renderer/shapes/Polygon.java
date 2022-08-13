@@ -68,28 +68,6 @@ public class Polygon {
         }
     }
 
-    //this is only used for finding simplex, so order of points doesnt matter when used, it will add to end
-    public void addPoint(Point newPoint){
-        Point[] newPoints = new Point[points.length + 1];
-        for(int i = 0; i < points.length; i++){
-            newPoints[i] = points[i];
-        }
-        newPoints[points.length] = newPoint;
-        points = newPoints;
-    }
-    //function used for modifying simplex, it will remove a point at a given index to modify shape
-    public void removePoint(int index){
-        if(index > points.length || index < 0) return;
-        Point[] newPoints = new Point[points.length - 1];
-        for(int i = 0; i < index; i++){
-            newPoints[i] = points[i];
-        }
-        for(int i = index + 1; i < points.length; i++){
-            newPoints[i-1] = points[i];
-        }
-        points = newPoints;
-    }
-
     private void updateLightingColor(double lightRatio) {
         int red = (int) (this.baseColor.getRed() * lightRatio);
         int green = (int) (this.baseColor.getGreen() * lightRatio);

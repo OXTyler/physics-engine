@@ -1,5 +1,6 @@
 package renderer.entity;
 
+import physics.Collider;
 import renderer.input.ControlType;
 import renderer.point.Vector;
 import renderer.shapes.Polyhedron;
@@ -11,6 +12,7 @@ import java.util.List;
 public class Entity implements IEntity{
 
     private List<Polyhedron> polys;
+    private Collider collider;
 
     public Entity(List<Polyhedron> polys) {
         this.polys = polys;
@@ -53,5 +55,8 @@ public class Entity implements IEntity{
         }
     }
 
+    public Collider getCollider(){
+        return collider;
+    }
 
 }
