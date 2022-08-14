@@ -33,15 +33,11 @@ public class EntityManager {
         //this.entities.add(BasicEntityBuilder.loadSTL(Color.BLUE, Paths.get("C:\\Users\\lackt\\Documents\\Projects\\Physics Engine\\src\\main\\java\\renderer\\entity\\shapeFiles\\astronaut.stl"), 0, 0, 0));
         //this.entities.add(BasicEntityBuilder.createPlane(Color.RED, 500));
         this.entities.add(BasicEntityBuilder.createCube(100,0,0,0));
-        this.entities.add(BasicEntityBuilder.createCube(100,0,0,0));
+        this.entities.add(BasicEntityBuilder.createCube(100,0,100,0));
         this.setLighting();
     }
 
-    public void rotate(ControlType mode, boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector){
-        for(IEntity entity : this.entities){
-            entity.rotate(mode, CW, xDegrees, yDegrees, zDegrees, lightVector);
-        }
-    }
+
     //TODO create better lighting system
     private void setLighting() {
         for(IEntity entity : this.entities){
@@ -52,6 +48,13 @@ public class EntityManager {
     public void render(Graphics graphics){
         for(IEntity entity : this.entities){
             entity.render(graphics);
+            entity.getCollider().render(graphics);
+        }
+    }
+
+    public void rotate(ControlType mode, boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector){
+        for(IEntity entity : this.entities){
+            entity.rotate(mode, CW, xDegrees, yDegrees, zDegrees, lightVector);
         }
     }
 
@@ -66,7 +69,6 @@ public class EntityManager {
     }
 
     public void update(){
-
         if(entities.size() > 1){
             if(Collision.isCollide(entities.get(0).getCollider(), entities.get(1).getCollider())){
                 for(Polyhedron poly : entities.get(0).getPolyhedrons()){

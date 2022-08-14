@@ -54,7 +54,7 @@ public class Controller implements KeyListener {
                 mode = mode == 0 ? 1 : 0;
                 break;
         }
-        if(e.isControlDown()) entityManager.translate(0,0,-speed);
+        if(e.isControlDown()) entityManager.getEntitiy(1).translate(0,-10,0);
     }
 
     @Override

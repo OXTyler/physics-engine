@@ -2,10 +2,12 @@ package physics;
 
 import renderer.Display;
 import renderer.point.Point;
+import renderer.point.PointConverter;
 import renderer.point.Vector;
 import renderer.shapes.Polygon;
 import renderer.shapes.Polyhedron;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +46,19 @@ public class Collider {
         }
     }
 
+    public void rotate(boolean CW, double xDeg, double yDeg, double zDeg, Vector center){
+        for(Vector vertex : this.vertices){
+            Vector.rotateAxisX(vertex, CW, xDeg, center);
+            Vector.rotateAxisY(vertex, CW, yDeg, center);
+            Vector.rotateAxisZ(vertex, CW, zDeg, center);
+        }
+    }
+
     public Vector getCenter(){
         int xSum = 0;
         int ySum = 0;
         int zSum = 0;
-        Point center = new Point();
+        Vector center = new Vector();
         for(int i = 0; i < vertices.size(); i++){
             xSum += vertices.get(i).x;
             ySum += vertices.get(i).y;
@@ -57,6 +67,16 @@ public class Collider {
         center.x = xSum / vertices.size();
         center.y = ySum / vertices.size();
         center.z = zSum / vertices.size();
-        return new Vector(center.x, center.y, center.z);
+        return center;
+    }
+    //for Debugging
+    public void render(Graphics g){
+        int FOCAL = 1800;
+        for(Vector v : vertices){
+            int y2d = (int) ((FOCAL * v.z /(PointConverter.Dist - (v.x - FOCAL))) + Display.HEIGHT/2);
+            int x2d = (int) ((FOCAL * v.y/(PointConverter.Dist - (v.x - FOCAL))) + Display.WIDTH/2);
+            g.drawOval(x2d,y2d, 10,10);
+        }
+
     }
 }

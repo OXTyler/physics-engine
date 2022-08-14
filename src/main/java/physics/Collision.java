@@ -1,5 +1,7 @@
 package physics;
 
+import renderer.Display;
+import renderer.point.Point;
 import renderer.point.Vector;
 import renderer.shapes.Polyhedron;
 
@@ -9,7 +11,7 @@ import renderer.shapes.Polyhedron;
 public class Collision {
     //this is what is actually used, will use 2 helper functions, triangle then line
     public static boolean isCollide(Collider c1, Collider c2){
-        Vector[] dir = new Vector[]{Vector.normalize(Vector.sub(c1.getCenter(), c2.getCenter()))};
+        Vector[] dir = new Vector[]{new Vector(Display.origin, new Point(1,0,0))};
         //used to create a point to start the simplex
         Vector start = support(dir[0], c1, c2);
         Simplex[] simplex = new Simplex[]{new Simplex(start)};

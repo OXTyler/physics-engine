@@ -1,6 +1,7 @@
 package renderer;
 
 import renderer.entity.EntityManager;
+import renderer.entity.IEntity;
 import renderer.input.ClickType;
 import renderer.input.Controller;
 import renderer.input.Mouse;
@@ -114,6 +115,8 @@ public class Display  extends Canvas implements Runnable{
         ui.render(uiGraphics);
         uiGraphics.dispose();
         graphics.dispose();
+
+
         bs.show();
     }
 

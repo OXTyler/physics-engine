@@ -10,6 +10,10 @@ Currently only works for convex objects
 * improve rendering efficiency in general (currently has trouble at 5k+ faces)
 * add way to create center of mass based off volume (assuming uniform density)
 
+#Fix:
+* rotations break after switching between camera and object mode
+* collisions dont work
+
 #Sources:
 \
 https://blog.hamaluik.ca/posts/building-a-collision-engine-part-1-2d-gjk-collision-detection/ \

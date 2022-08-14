@@ -20,7 +20,7 @@ public class PointConverter {
     }
 
     public static void rotateAxisX(Point point, Boolean CW, double degrees, Point center){
-        double radius = Math.sqrt((point.y - center.x) * (point.y - center.y) +  (point.z - center.z) * (point.z -center.z));
+        double radius = Math.sqrt((point.y - center.y) * (point.y - center.y) +  (point.z - center.z) * (point.z -center.z));
         double theta = Math.atan2(point.z-center.z, point.y-center.y);
         theta += 2*Math.PI/360*degrees*(CW ? -1: 1);
         point.z = radius * Math.sin(theta) + center.z;

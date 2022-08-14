@@ -1,7 +1,10 @@
 package renderer.entity;
 
 import physics.Collider;
+import renderer.Camera;
+import renderer.Display;
 import renderer.input.ControlType;
+import renderer.point.Point;
 import renderer.point.Vector;
 import renderer.shapes.Polyhedron;
 
@@ -13,7 +16,8 @@ public class Entity implements IEntity{
 
     private List<Polyhedron> polys;
     private Collider collider;
-
+    private Vector center;
+    int xSum = 0,ySum = 0,zSum = 0;
     public Entity(List<Polyhedron> polys) {
         this.polys = polys;
     }
@@ -21,11 +25,18 @@ public class Entity implements IEntity{
     public Entity(Polyhedron poly){
         polys = new ArrayList<>();
        this.polys.add(poly);
+       this.center = poly.getCenter();
        this.collider = new Collider(polys);
     }
 
     public void addShape(Polyhedron poly){
         this.polys.add(poly);
+        xSum += poly.getCenter().x;
+        ySum += poly.getCenter().y;
+        zSum += poly.getCenter().z;
+        this.center.x = xSum / polys.size();
+        this.center.y = ySum / polys.size();
+        this.center.z = zSum / polys.size();
     }
 
     @Override
@@ -40,6 +51,12 @@ public class Entity implements IEntity{
         for(Polyhedron poly: this.polys){
             poly.rotate(mode, CW, xDegrees, yDegrees, zDegrees, lightVector);
         }
+        if(mode == ControlType.Object)
+            collider.rotate(CW, xDegrees, yDegrees, zDegrees, collider.getCenter());
+        else if(mode == ControlType.Camera){
+            collider.rotate(CW, xDegrees, yDegrees, zDegrees, new Vector(Display.origin,Camera.cameraCoords));
+        }
+
     }
 
     @Override
