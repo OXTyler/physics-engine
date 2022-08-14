@@ -40,10 +40,10 @@ public class Camera {
         xDif = x - initialX;
         yDif = y - initialY;
 
-        entityManager.rotate(Controller.getMode(), true, 0, yDif / sensitivity, -xDif / sensitivity, entityManager.lightVector);
+       // entityManager.rotate(Controller.getMode(), true, 0, yDif / sensitivity, -xDif / sensitivity, entityManager.lightVector);
     }
     private static void rotateObjectZ(EntityManager entityManager){
         xDif = x - initialX;
-        entityManager.rotate(Controller.getMode(),true, -xDif / sensitivity, 0 ,0, entityManager.lightVector);
+        //entityManager.rotate(Controller.getMode(),true, -xDif / sensitivity, 0 ,0, entityManager.lightVector);
     }
 }

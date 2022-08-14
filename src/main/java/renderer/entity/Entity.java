@@ -21,6 +21,7 @@ public class Entity implements IEntity{
     public Entity(Polyhedron poly){
         polys = new ArrayList<>();
        this.polys.add(poly);
+       this.collider = new Collider(polys);
     }
 
     public void addShape(Polyhedron poly){
@@ -46,6 +47,7 @@ public class Entity implements IEntity{
         for(Polyhedron poly : polys){
             poly.translate(x,y,z);
         }
+        collider.translate(x,y,z);
     }
 
     @Override
@@ -54,9 +56,14 @@ public class Entity implements IEntity{
             poly.setLighting(lightVector);
         }
     }
-
+    @Override
     public Collider getCollider(){
         return collider;
+    }
+
+    @Override
+    public List<Polyhedron> getPolyhedrons(){
+        return this.polys;
     }
 
 }

@@ -121,5 +121,6 @@ public class Display  extends Canvas implements Runnable{
     private void update(){
         Camera.update(entityManager, mouse);
         ui.update();
+        entityManager.update();
     }
 }

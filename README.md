@@ -11,5 +11,7 @@ Currently only works for convex objects
 * add way to create center of mass based off volume (assuming uniform density)
 
 #Sources:
+\
 https://blog.hamaluik.ca/posts/building-a-collision-engine-part-1-2d-gjk-collision-detection/ \
-https://en.wikipedia.org/wiki/Binary_space_partitioning
+https://en.wikipedia.org/wiki/Binary_space_partitioning \
+https://blog.winter.dev/2020/gjk-algorithm/

@@ -2,6 +2,7 @@ package renderer.point;
 
 public class Vector {
     public double x, y, z;
+    public static Vector zero = new Vector(0,0,0);
     public Vector(){
         this.x = this.y = this.z = 0;
     }

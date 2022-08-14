@@ -105,4 +105,9 @@ public class Polyhedron {
         return polygons;
     }
 
+    public void setColor(Color color) {
+        for(Polygon poly : polygons){
+            poly.setColor(color);
+        }
+    }
 }

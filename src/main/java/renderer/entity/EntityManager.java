@@ -1,9 +1,12 @@
 package renderer.entity;
 
+import physics.Collider;
+import physics.Collision;
 import renderer.entity.builder.BasicEntityBuilder;
 import renderer.input.ControlType;
 import renderer.point.Point;
 import renderer.point.Vector;
+import renderer.shapes.Polyhedron;
 
 import java.awt.*;
 import java.io.IOException;
@@ -27,9 +30,10 @@ public class EntityManager {
     //TODO make a way to spawn objects inside the render
     public void init() throws IOException {
         //this.entities.add(BasicEntityBuilder.createDiamond(Color.CYAN,100, 0 ,0 ,100));
-        this.entities.add(BasicEntityBuilder.loadSTL(Color.BLUE, Paths.get("C:\\Users\\lackt\\Documents\\Projects\\Physics Engine\\src\\main\\java\\renderer\\entity\\shapeFiles\\astronaut.stl"), 0, 0, 0));
+        //this.entities.add(BasicEntityBuilder.loadSTL(Color.BLUE, Paths.get("C:\\Users\\lackt\\Documents\\Projects\\Physics Engine\\src\\main\\java\\renderer\\entity\\shapeFiles\\astronaut.stl"), 0, 0, 0));
         //this.entities.add(BasicEntityBuilder.createPlane(Color.RED, 500));
-        //this.entities.add(BasicEntityBuilder.createCube(100,0,0,0));
+        this.entities.add(BasicEntityBuilder.createCube(100,0,0,0));
+        this.entities.add(BasicEntityBuilder.createCube(100,0,0,0));
         this.setLighting();
     }
 
@@ -57,7 +61,30 @@ public class EntityManager {
         }
     }
 
+    public IEntity getEntitiy(int index){
+        return this.entities.get(index);
+    }
+
     public void update(){
+
+        if(entities.size() > 1){
+            if(Collision.isCollide(entities.get(0).getCollider(), entities.get(1).getCollider())){
+                for(Polyhedron poly : entities.get(0).getPolyhedrons()){
+                    poly.setColor(Color.GREEN);
+                }
+                for(Polyhedron poly : entities.get(1).getPolyhedrons()){
+                    poly.setColor(Color.GREEN);
+                }
+            } else {
+
+                for(Polyhedron poly : entities.get(0).getPolyhedrons()){
+                    poly.setColor(Color.RED);
+                }
+                for(Polyhedron poly : entities.get(1).getPolyhedrons()){
+                    poly.setColor(Color.RED);
+                }
+            }
+        }
 
     }
 }
