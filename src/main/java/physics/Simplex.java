@@ -1,6 +1,10 @@
 package physics;
 
+import renderer.Display;
+import renderer.point.PointConverter;
 import renderer.point.Vector;
+
+import java.awt.*;
 
 //this design is taken from a blog called Winter's Blog, in sources
 public class Simplex {
@@ -18,17 +22,13 @@ public class Simplex {
         if(size < 4) size++;
     }
 
-    public void removeVertex(int index){
-        if(vertices.length == 0 || index >= vertices.length) return;
-        Vector[] newVertices = new Vector[this.vertices.length - 1];
-        for(int i = 0; i < index; i++){
-            newVertices[i] = this.vertices[i];
+    public void render(Graphics g){
+        int FOCAL = 1800;
+        for(Vector v : vertices){
+            int y2d = (int) ((FOCAL * v.z /(PointConverter.Dist - (v.x - FOCAL))) + Display.HEIGHT/2);
+            int x2d = (int) ((FOCAL * v.y/(PointConverter.Dist - (v.x - FOCAL))) + Display.WIDTH/2);
+            g.drawOval(x2d,y2d, 10,10);
         }
-        for(int i = index + 1; i < this.vertices.length; i++){
-            newVertices[i-1] = this.vertices[i];
-        }
-        this.vertices = newVertices;
-        size --;
-    }
 
+    }
 }

@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicEntityBuilder {
+public class EntityBuilder {
     //size is side length of cube
     public static IEntity createCube(int size, double centerX, double centerY, double centerZ){
 

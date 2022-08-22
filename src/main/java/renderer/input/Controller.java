@@ -46,7 +46,7 @@ public class Controller implements KeyListener {
                 entityManager.translate(0, -speed, 0);
                 break;
             case ' ':
-                entityManager.translate(0,0, speed);
+                entityManager.getEntitiy(1).translate(0,10, 0);
                 break;
             //changes mode between object and camera mode
             case 't':

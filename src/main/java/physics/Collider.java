@@ -26,13 +26,12 @@ public class Collider {
 
     public Vector getFurthest(Vector dir) {
         double magnitude;
-        Vector furthest;
-        furthest = vertices.get(0);
-        magnitude = Vector.dot(furthest, dir);
-        for(Vector vector : vertices){
-            if(Vector.dot(vector, dir) > magnitude){
-                magnitude = Vector.dot(vector, dir);
-                furthest = vector;
+        Vector furthest = this.vertices.get(0);
+        magnitude = -Double.MAX_VALUE;
+        for(Vector vertex : this.vertices){
+            if(Vector.dot(vertex, dir) > magnitude){
+                magnitude = Vector.dot(vertex, dir);
+                furthest = vertex;
             }
         }
         return furthest;
