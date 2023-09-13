@@ -9,25 +9,28 @@ import renderer.point.Vector;
 //code adapted from winter.dev code in sources
 public class CollisionManager {
     public Simplex[] simplex;
+    private static int iterations = 256;
     public CollisionManager(){
 
     };
     //this is what is actually used, will use 2 helper functions, triangle then line
     public boolean isCollide(Collider c1, Collider c2){
+
         Vector[] dir = new Vector[]{new Vector(1,0,0)};
         //used to create a point to start the simplex
         Vector sup = support(dir[0], c1, c2);
         this.simplex = new Simplex[]{new Simplex(sup)};
         dir[0] = Vector.inverse(sup);
-        while (true){
+        for(int i = 0; i < iterations; i++){
             sup = support(dir[0], c1, c2);
-            if(Vector.dot(sup,dir[0]) <= 0)
+            if(Vector.dot(sup,dir[0]) > 0)
                 return false;
             simplex[0].addVertex(sup);
             if(nextSimplex(simplex, dir)){
                 return true;
             }
         }
+        return false;
     }
 
     private static boolean nextSimplex(Simplex[] simplex, Vector... direction){

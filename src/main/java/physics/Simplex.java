@@ -24,9 +24,9 @@ public class Simplex {
 
     public void render(Graphics g){
         int FOCAL = 1800;
-        for(Vector v : vertices){
-            int y2d = (int) ((FOCAL * v.z /(PointConverter.Dist - (v.x - FOCAL))) + Display.HEIGHT/2);
-            int x2d = (int) ((FOCAL * v.y/(PointConverter.Dist - (v.x - FOCAL))) + Display.WIDTH/2);
+        for(int i = 0 ; i< size; i++){
+            int y2d = (int) ((FOCAL * vertices[i].z /(PointConverter.Dist - (vertices[i].x - FOCAL))) + Display.HEIGHT/2);
+            int x2d = (int) ((FOCAL * vertices[i].y/(PointConverter.Dist - (vertices[i].x - FOCAL))) + Display.WIDTH/2);
             g.drawOval(x2d,y2d, 10,10);
         }
 

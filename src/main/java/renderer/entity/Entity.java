@@ -45,14 +45,14 @@ public class Entity implements IEntity{
             poly.render(graphics);
         }
     }
-
+    //TODO fix rotation to account for camera
     @Override
     public void rotate(ControlType mode, boolean CW, double xDegrees, double yDegrees, double zDegrees, Vector lightVector) {
         for(Polyhedron poly: this.polys){
             poly.rotate(mode, CW, xDegrees, yDegrees, zDegrees, lightVector);
         }
         if(mode == ControlType.Object)
-            collider.rotate(CW, xDegrees, yDegrees, zDegrees, collider.getCenter());
+            this.collider.rotate(CW, xDegrees, yDegrees, zDegrees, this.collider.getCenter());
         else if(mode == ControlType.Camera){
             collider.rotate(CW, xDegrees, yDegrees, zDegrees, new Vector(Display.origin,Camera.cameraCoords));
         }

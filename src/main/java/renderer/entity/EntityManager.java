@@ -52,7 +52,8 @@ public class EntityManager {
             entity.render(graphics);
             entity.getCollider().render(graphics);
             graphics.setColor(Color.WHITE);
-            collisionManager.simplex[0].render(graphics);
+            if(collisionManager.simplex != null)
+                collisionManager.simplex[0].render(graphics);
             graphics.setColor(Color.RED);
         }
     }

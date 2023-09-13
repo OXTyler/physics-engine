@@ -6,6 +6,11 @@ public class Vector {
     public Vector(){
         this.x = this.y = this.z = 0;
     }
+    public Vector(Vector v){
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
     public Vector(double x, double y, double z){
         this.x = x;
         this.y = y;
@@ -16,6 +21,26 @@ public class Vector {
         this.y = p2.y - p1.y;
         this.z = p2.z - p1.z;
     }
+    //overriding equals and hashcode so I can use object comparisons in HashSet
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || o.getClass() != this.getClass()){
+            return false;
+        }
+        final Vector V = (Vector) o;
+        return this.x == V.x && this.y == V.y && this.z == V.z;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 23;
+        hash = hash * 31 + (int)this.x;
+        hash = hash * 31 + (int)this.y;
+        hash = hash * 31 + (int)this.z;
+        hash = hash * 31 + 10;
+        return hash;
+    }
+
 
     public static Vector normalize(Vector v) {
         double mag = Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
@@ -35,7 +60,6 @@ public class Vector {
                           v1.z * v2.x - v1.x * v2.z,
                           v1.x * v2.y - v1.y * v2.x);
     }
-
     public static Vector inverse(Vector v) {
         v.x *= -1;
         v.y *= -1;

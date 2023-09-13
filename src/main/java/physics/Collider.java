@@ -9,19 +9,27 @@ import renderer.shapes.Polyhedron;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Collider {
     ArrayList<Vector> vertices;
     public Collider(List<Polyhedron> polys){
         vertices = new ArrayList<>();
+        Set<Vector> vertSet = new HashSet<Vector>();
         for(Polyhedron poly : polys){
             for(Polygon polygon: poly.getPolygons()){
                 for(Point point : polygon.getPoints()){
-                    vertices.add(new Vector(Display.origin, point));
+                    Vector v = new Vector(Display.origin, point);
+                    vertSet.add(v);
                 }
             }
         }
+        for (Vector v : vertSet){
+        }
+        vertices = new ArrayList<Vector>(vertSet);
+        System.out.println(vertices);
     }
 
     public Vector getFurthest(Vector dir) {
@@ -54,9 +62,9 @@ public class Collider {
     }
 
     public Vector getCenter(){
-        int xSum = 0;
-        int ySum = 0;
-        int zSum = 0;
+        double xSum = 0;
+        double ySum = 0;
+        double zSum = 0;
         Vector center = new Vector();
         for(int i = 0; i < vertices.size(); i++){
             xSum += vertices.get(i).x;

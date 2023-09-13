@@ -5,10 +5,10 @@ import renderer.point.Vector;
 public class VectorTests {
     @Test
     void CrossProduct() {
-        Vector v1 = new Vector(1,1,1);
-        Vector v2 = new Vector(0,1,1);
+        Vector v1 = new Vector(5,3,1);
+        Vector v2 = new Vector(2,3,4);
         Vector ans = Vector.cross(v1,v2);
-        Vector right = new Vector(0,-1,1);
+        Vector right = new Vector(9,-18,9);
         Assertions.assertEquals(ans.x,right.x);
         Assertions.assertEquals(ans.y,right.y);
         Assertions.assertEquals(ans.z,right.z);

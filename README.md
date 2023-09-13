@@ -9,8 +9,9 @@ Currently only works for convex objects
 * add axis to help see which way camera is looking
 * improve rendering efficiency in general (currently has trouble at 5k+ faces)
 * add way to create center of mass based off volume (assuming uniform density)
+* Implement Generics(?)
 
-# Fix:
+# Fix:s
 * rotations break after switching between camera and object mode
 * collisions dont work
 

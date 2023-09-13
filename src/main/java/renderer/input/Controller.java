@@ -34,16 +34,16 @@ public class Controller implements KeyListener {
         //used for camera controller key binds, probably a better way to do this
         switch (e.getKeyChar()){
             case 'w':
-                entityManager.translate(speed, 0,0);
+                entityManager.getEntitiy(1).translate(speed, 0,10);
                 break;
             case 'a':
-                entityManager.translate(0,speed,0);
+                entityManager.getEntitiy(1).translate(-10, -speed, 0);
                 break;
             case 's':
-                entityManager.translate(-speed, 0,0);
+                entityManager.getEntitiy(1).translate(speed, 0,-10);
                 break;
             case 'd':
-                entityManager.translate(0, -speed, 0);
+                entityManager.getEntitiy(1).translate(10, -speed, 0);
                 break;
             case ' ':
                 entityManager.getEntitiy(1).translate(0,10, 0);
